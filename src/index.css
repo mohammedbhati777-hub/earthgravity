@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Michroma", "Space Grotesk", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-data: "IBM Plex Mono", monospace;
+
+  --color-void: #040810;
+  --color-abyss: #070d1a;
+  --color-hull: #0b1424;
+  --color-hull2: #0e1a2e;
+  --color-line: #1d3350;
+  --color-line2: #2a4a73;
+  --color-cyan: #5fe0ff;
+  --color-cyan2: #9beaff;
+  --color-cyandim: #2e7fa3;
+  --color-amber: #ffb648;
+  --color-amber2: #ffd9a0;
+  --color-danger: #ff6b5e;
+  --color-ok: #7dffa8;
+  --color-ink: #e6f2fb;
+  --color-ink2: #8fa9c4;
+  --color-ink3: #54718f;
+}
+
+html, body {
+  font-family: var(--font-body);
+  background: var(--color-void);
+  color: var(--color-ink);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: rgba(95, 224, 255, 0.3); }
+
+/* ---------- scrollbars ---------- */
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: rgba(10, 20, 38, 0.6); }
+*::-webkit-scrollbar-thumb { background: #24466e; border: 1px solid #0b1424; }
+*::-webkit-scrollbar-thumb:hover { background: #2e7fa3; }
+
+/* ---------- instrument panel chrome ---------- */
+.chamfer {
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+.chamfer-sm {
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+.panel {
+  background: linear-gradient(160deg, rgba(13, 24, 43, 0.92), rgba(7, 13, 26, 0.94));
+  border: 1px solid var(--color-line);
+  box-shadow: 0 0 0 1px rgba(4, 8, 16, 0.8), inset 0 0 24px rgba(20, 50, 90, 0.15);
+}
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--color-cyan);
+  text-transform: uppercase;
+}
+.tickrow {
+  background-image: repeating-linear-gradient(90deg, rgba(95, 224, 255, 0.28) 0 1px, transparent 1px 10%);
+  height: 5px;
+}
+
+/* corner brackets */
+.corners { position: relative; }
+.corners::before, .corners::after {
+  content: ""; position: absolute; width: 10px; height: 10px; pointer-events: none;
+  border-color: var(--color-cyan); border-style: solid; opacity: 0.85;
+}
+.corners::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.corners::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* ---------- range inputs (precision sliders) ---------- */
+input[type="range"].dial {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer;
+}
+input[type="range"].dial::-webkit-slider-runnable-track {
+  height: 4px; background: linear-gradient(90deg, #1d3350, #2a4a73);
+  border: 1px solid #16293f;
+}
+input[type="range"].dial::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 12px; height: 18px; margin-top: -8px;
+  background: linear-gradient(180deg, #9beaff, #5fe0ff 55%, #2e7fa3);
+  border: 1px solid #0b1424; box-shadow: 0 0 8px rgba(95, 224, 255, 0.55);
+  clip-path: polygon(50% 0, 100% 26%, 100% 100%, 0 100%, 0 26%);
+}
+input[type="range"].dial::-moz-range-track { height: 4px; background: #22405f; }
+input[type="range"].dial::-moz-range-thumb {
+  width: 12px; height: 18px; border: 1px solid #0b1424; border-radius: 0;
+  background: linear-gradient(180deg, #9beaff, #5fe0ff 55%, #2e7fa3);
+}
+input[type="range"].dial.amber::-webkit-slider-thumb {
+  background: linear-gradient(180deg, #ffd9a0, #ffb648 55%, #a06a1c);
+  box-shadow: 0 0 8px rgba(255, 182, 72, 0.55);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  font-family: var(--font-display); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--color-cyan2); background: linear-gradient(180deg, rgba(30, 58, 94, 0.55), rgba(13, 26, 46, 0.9));
+  border: 1px solid var(--color-line2); padding: 8px 14px; cursor: pointer;
+  transition: all 0.16s ease; position: relative; user-select: none;
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+}
+.btn:hover { background: linear-gradient(180deg, rgba(46, 127, 163, 0.7), rgba(24, 48, 80, 0.95)); color: #fff; box-shadow: 0 0 14px rgba(95, 224, 255, 0.25); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { color: #051019; background: linear-gradient(180deg, #9beaff, #45c4ec 60%, #2b96c4); border-color: #9beaff; }
+.btn.primary:hover { background: linear-gradient(180deg, #c4f3ff, #5fd4f5 60%, #35a8d8); box-shadow: 0 0 20px rgba(95, 224, 255, 0.5); }
+.btn.amber { color: #201302; background: linear-gradient(180deg, #ffd9a0, #ffb648 60%, #d18a24); border-color: #ffd9a0; }
+.btn.danger { color: #2b0703; background: linear-gradient(180deg, #ffb3ab, #ff6b5e 60%, #cf4437); border-color: #ffb3ab; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn.on { color: #051019; background: linear-gradient(180deg, #9beaff, #5fe0ff); }
+
+.seg { display: flex; border: 1px solid var(--color-line); background: rgba(7, 13, 26, 0.8); }
+.seg > button {
+  flex: 1; font-family: var(--font-data); font-size: 9px; letter-spacing: 0.12em; padding: 6px 4px;
+  color: var(--color-ink2); background: transparent; border: none; border-right: 1px solid var(--color-line);
+  cursor: pointer; transition: all 0.14s;
+}
+.seg > button:last-child { border-right: none; }
+.seg > button:hover { color: var(--color-cyan2); background: rgba(46, 127, 163, 0.18); }
+.seg > button.on { color: #04121c; background: linear-gradient(180deg, #8ce6ff, #4cc0e8); font-weight: 600; }
+
+/* ---------- ambient layers ---------- */
+.scanlines::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 40;
+  background: repeating-linear-gradient(0deg, rgba(160, 220, 255, 0.022) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen;
+}
+.vignette {
+  background: radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(2, 5, 12, 0.55) 100%);
+}
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(95, 224, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95, 224, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* ---------- animation ---------- */
+@keyframes blink { 0%, 62% { opacity: 1; } 63%, 100% { opacity: 0.15; } }
+.blink { animation: blink 1.4s steps(1) infinite; }
+@keyframes pulseGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.pulse-glow { animation: pulseGlow 2.2s ease-in-out infinite; }
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin-slow { animation: spinSlow 90s linear infinite; }
+.spin-slower { animation: spinSlow 240s linear infinite reverse; }
+@keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.rise-in { animation: riseIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes drawRing { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.ring-in { animation: drawRing 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blink, .pulse-glow, .spin-slow, .spin-slower { animation: none; }
+  .rise-in, .ring-in { animation-duration: 0.01s; }
+}
+
+/* data readouts */
+.readout { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.lbl {
+  font-family: var(--font-display); font-size: 8.5px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--color-ink3);
+}
+
+/* number inputs */
+input[type="number"].nin, input[type="text"].nin {
+  font-family: var(--font-data); font-size: 12px; color: var(--color-cyan2);
+  background: rgba(7, 16, 30, 0.9); border: 1px solid var(--color-line);
+  padding: 6px 8px; width: 100%; outline: none;
+}
+input[type="number"].nin:focus, input[type="text"].nin:focus { border-color: var(--color-cyan); box-shadow: 0 0 10px rgba(95, 224, 255, 0.2); }
+
+/* tooltip */
+.tip { position: relative; }
+.tip:hover::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: #0b1830; border: 1px solid var(--color-line2); color: var(--color-cyan2);
+  font-family: var(--font-data); font-size: 10px; padding: 6px 9px; white-space: nowrap; z-index: 80;
+  pointer-events: none; letter-spacing: 0.05em;
+}
